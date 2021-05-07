@@ -1,0 +1,11 @@
+{
+  "name": "proposal-test",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "devDependencies": {
+    "dotenv": "^9.0.0",
+    "ethers": "^5.1.4"
+  }
+}
