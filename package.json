@@ -2,7 +2,8 @@
   "name": "proposal-test",
   "version": "1.0.0",
   "scripts": {
-    "start": "node main.js"
+    "make-proposal": "node make-proposal.js",
+    "read-proposal": "node read-proposal.js"
   },
   "devDependencies": {
     "dotenv": "^9.0.0",
