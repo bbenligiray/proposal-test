@@ -16,7 +16,7 @@ const encodedExecuteSignature = encodeFunctionSignature('execute(address,uint256
 
 const targetContractAddress = '0x0E7FdA608937489f410377745dAE331d14965bB0';
 const targetFunctionSignature = 'transfer(address,uint256)'
-const targetValue = '123';
+const targetValue = '0';
 const targetParameters = ['0x07b589f06bD0A5324c4E2376d66d2F4F25921DE1', '456'];
 const metaData = 'www.myproposaljustification.com';
 
