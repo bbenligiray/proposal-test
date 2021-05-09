@@ -90,6 +90,7 @@ async function readProposal() {
 
   // Peel the execution layer
   assert(ethers.utils.hexDataSlice(callData, 0, 4) == encodedExecuteSignature);
+  // https://github.com/aragon/aragon-apps/blob/631048d54b9cc71058abb8bd7c17f6738755d950/apps/agent/contracts/Agent.sol#L70
   const executionParameters = ethers.utils.defaultAbiCoder.decode(
     ['address', 'uint256', 'bytes'],
     ethers.utils.hexDataSlice(callData, 4)
