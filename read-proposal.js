@@ -23,7 +23,7 @@ const agentAppAddresses = {
 
 // THE USER PROVIDES THESE
 const proposalType = 'secondary';
-const proposalIndex = '0';
+const proposalIndex = '1';
 // THE USER PROVIDES THESE
 
 // Note that this function assumes the proposal was created according to the conventions
@@ -55,7 +55,6 @@ async function readProposal() {
   const parsedLog = votingApp.interface.parseLog(votingLog);
   // In addition to the vote creation event, we fetch the vote struct
   const vote = await votingApp.getVote(proposalIndex);
-  const forwardedEvmScript = vote.script;
 
   // Recall that in make-proposal.js, the maker of the vote prepended the metadata with
   // the target function signature. We will recover that here. The rest of the metadata
@@ -65,17 +64,9 @@ async function readProposal() {
   const metadata = parsedLog.args.metadata.substr(metadataSeperatorIndex + 1);
   console.log(`Metadata: ${metadata}`);
 
-  // Peel the forwarding layer. Note that all assertions in this example should also be
-  // done at the client (and throw if they are not satisfied).
-  assert(ethers.utils.hexDataSlice(forwardedEvmScript, 0, 4) == encodedForwardSignature);
-  const evmScript = ethers.utils.defaultAbiCoder.decode(
-    ['bytes'],
-    ethers.utils.hexDataSlice(forwardedEvmScript, 4)
-  )[0];
-
   // Validate EVMScript spec ID
-  assert(ethers.utils.hexDataSlice(evmScript, 0, 4) == '0x00000001');
-  const evmScriptPayload = ethers.utils.hexDataSlice(evmScript, 4);
+  assert(ethers.utils.hexDataSlice(vote.script, 0, 4) == '0x00000001');
+  const evmScriptPayload = ethers.utils.hexDataSlice(vote.script, 4);
 
   // Get the target contract address
   const readAgentAddress = ethers.utils.hexDataSlice(evmScriptPayload, 0, 20);
